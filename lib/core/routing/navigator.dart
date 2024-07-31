@@ -27,10 +27,7 @@ class AppRoutes {
         return AppRoutes.aniamtedNavigation(
           screen: const CalendarScreen(),
         );
-      case Routes.customForm:
-        return AppRoutes.aniamtedNavigation(
-          screen: const MyCustomForm(),
-        );
+      
 
       case Routes.navBar:
         return AppRoutes.aniamtedNavigation(

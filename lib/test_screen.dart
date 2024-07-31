@@ -1,156 +1,205 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:ringo_media/core/components/custom_button.dart';
-import 'package:ringo_media/core/components/custom_form_field.dart';
 import 'package:ringo_media/core/utilities/colors.dart';
 import 'package:ringo_media/core/utilities/text_style_helper.dart';
-import 'package:ringo_media/core/validations/validators.dart';
-import 'package:ringo_media/features/login/presentation/view/widgets/social_media_buttons.dart';
 
-
-
-
-// Create a Form widget.
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
+class Calendar extends StatefulWidget {
+  const Calendar({super.key});
 
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
-  }
+  State<Calendar> createState() => _CalendarState();
 }
 
-// Create a corresponding State class.
-// This class holds data related to the form.
-class MyCustomFormState extends State<MyCustomForm> with Validations {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a GlobalKey<FormState>,
-  // not a GlobalKey<MyCustomFormState>.
-  final _formKey = GlobalKey<FormState>();
-   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class _CalendarState extends State<Calendar> {
+  DateTime selectedPreviousDate =
+      DateTime.now().subtract(const Duration(days: 30));
+  DateTime selectedDate = DateTime.now();
+  int currentDateSelectedIndex = 0;
+  ScrollController scrollController = ScrollController();
+  List<String> listOfMonths = [
+    "Jan",
+    "Feb",
+    "Mar",
+    'Apr',
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  List<String> listOfDays = ["Mon", "Tue", "Wed", "Tue", "Fri", "Sat", "Sun"];
 
   @override
   Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
-    return Scaffold(
-      body: SafeArea(
-        child: Form(
-          key: /* LoginCubit. */_formKey,
-          autovalidateMode: AutovalidateMode.always,
-          child: InkWell(
-            onTap: () {
-              FocusScope.of(context).unfocus();
-            },
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          automaticallyImplyLeading: false,
+          title: const Text('My Calendar'),
+        ),
+        backgroundColor: CutsomColors.neutralColor100,
+        body: Column(
+          children: [
+            // Show Current Date
+            Container(
+              //height: 90,
+              margin: const EdgeInsets.only(left: 10),
+              alignment: Alignment.centerLeft,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Login',
-                    style: TextStyleHelper.bold24,
+                      "${listOfMonths[selectedDate.month - 1]} ${selectedDate.year}",
+                      style: TextStyleHelper.bold18),
+                  // const SizedBox(width: 8),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.keyboard_arrow_down),
                   ),
-                  Text(
-                    'Sign in to your account',
-                    style: TextStyleHelper.medium14,
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Text(
-                    'Username / Email',
-                    style: TextStyleHelper.semiBold14,
-                  ),
-                  CustomFormField(
-                    hintText: 'Enter your username or email',
-                    keyboardType: TextInputType.text,
-                    controller: emailController,
-                    validator: isValidContent,
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Text(
-                    'Password',
-                    style: TextStyleHelper.semiBold14,
-                  ),
-                  CustomFormField(
-                    hintText: 'Enter your username or email',
-                    keyboardType: TextInputType.text,
-                    controller: passwordController,
-                    isAuth: true,
-                    isPassword: true,
-                    validator: isValidPassword,
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyleHelper.semiBold14,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  CustomButton(
-                    onPressed: () {
-                        if (/* LoginCubit. */_formKey.currentState!.validate()) {
-                        log('Validated');
-                      } 
-                    },
-                    text: 'Login',
-                     background: /* LoginCubit. */_formKey.currentState!.validate()
-                        ? CutsomColors.neutralColor900
-                        : CutsomColors.neutralColor300, 
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Center(
-                      child: Text(
-                    'Or login with account',
-                    style: TextStyleHelper.semiBold12,
-                  )),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  const SocialMediaButtons(),
-                  const SizedBox(
-                    height: 26,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don\'t have an account?',
-                        style: TextStyleHelper.medium14,
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Register here',
-                          style: TextStyleHelper.bold14,
+                  const Spacer(),
+                  IconButton(
+                    style: ButtonStyle(
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(10, 10)),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      shape: MaterialStateProperty.all(
+                        const RoundedRectangleBorder(
+                          side: BorderSide(color: CutsomColors.neutralColor200),
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
                       ),
-                    ],
+                    ),
+                    icon: const Icon(Icons.keyboard_arrow_left_rounded),
+                    onPressed: () {
+                      setState(() {
+                        selectedDate =
+                            selectedDate.subtract(const Duration(days: 7));
+                        if (currentDateSelectedIndex == 0) {
+                          scrollController.animateTo(
+                            scrollController.offset - 48,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                        if (currentDateSelectedIndex > 0) {
+                          currentDateSelectedIndex -= 6;
+                        }
+                      });
+                      //Navigator.pop(context);
+                    },
+                  ),
+                  IconButton(
+                    style: ButtonStyle(
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(10, 10)),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      shape: MaterialStateProperty.all(
+                        const RoundedRectangleBorder(
+                          side: BorderSide(color: CutsomColors.neutralColor200),
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        selectedDate =
+                            selectedDate.add(const Duration(days: 7));
+                        currentDateSelectedIndex += 6;
+                        if (currentDateSelectedIndex == 6) {
+                          scrollController.animateTo(
+                            scrollController.offset + 48,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      });
+                    },
+                    icon: const Icon(Icons.keyboard_arrow_right_rounded),
                   ),
                 ],
               ),
             ),
-          ),
+            const SizedBox(height: 10),
+            // Calendar Widget
+            SizedBox(
+              height: 100,
+              child: ListView.separated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(width: 8);
+                },
+                itemCount: 365,
+                controller: scrollController,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        currentDateSelectedIndex = index;
+                        selectedDate =
+                            DateTime.now().add(Duration(days: index));
+                      });
+                    },
+                    child: Container(
+                      height: 68,
+                      width: 48,
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade400,
+                            offset: const Offset(1, 1),
+                            blurRadius: 2,
+                          ),
+                        ],
+                        color: currentDateSelectedIndex == index
+                            ? CutsomColors.neutralColor900
+                            : Colors.white,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            listOfMonths[DateTime.now()
+                                    .add(Duration(days: index))
+                                    .month -
+                                1],
+                            style: TextStyleHelper.bold12.copyWith(
+                              color: currentDateSelectedIndex == index
+                                  ? Colors.white
+                                  : CutsomColors.neutralColor500,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            DateTime.now()
+                                .add(Duration(days: index))
+                                .day
+                                .toString(),
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              color: currentDateSelectedIndex == index
+                                  ? Colors.white
+                                  : CutsomColors.neutralColor900,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
-);
+    );
   }
 }

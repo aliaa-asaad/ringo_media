@@ -30,8 +30,9 @@ class _ProductivityBarChartState extends State<ProductivityBarChart> {
     return BarChart(
       BarChartData(
         alignment: BarChartAlignment.spaceAround,
-        barTouchData: BarTouchData(allowTouchBarBackDraw: true,
-          
+        barTouchData: BarTouchData(
+          allowTouchBarBackDraw: true,
+
           enabled: true,
           //  allowTouchBarBackDraw: true,handleBuiltInTouches: true,
           touchTooltipData: BarTouchTooltipData(
@@ -45,13 +46,13 @@ class _ProductivityBarChartState extends State<ProductivityBarChart> {
                 barIndex = groupIndex;
               }); */
               return BarTooltipItem(
-                data[groupIndex].productivity.toString(),
+                '${data[groupIndex].productivity.toInt()}%',
                 TextStyleHelper.bold14.copyWith(color: Colors.white),
               );
             },
           ),
 
-           touchCallback: (FlTouchEvent event, response) {
+          touchCallback: (FlTouchEvent event, response) {
             setState(() {
               if (!event.isInterestedForInteractions ||
                   response == null ||

@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       toolbarHeight: 80,
        elevation: 0,scrolledUnderElevation: 0,
-      backgroundColor: Colors.white,
+     // backgroundColor: Colors.white,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0), // height of the divider
         child: Container(

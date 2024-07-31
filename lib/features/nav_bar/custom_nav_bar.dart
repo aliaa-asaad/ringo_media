@@ -16,12 +16,31 @@ class CustomNavBar extends StatefulWidget {
 
 class CustomNavBarState extends State<CustomNavBar> {
   var currentIndex = 1;
+  DateTime? date;
+  pickDate()async {
+    showDatePicker(barrierDismissible: false,
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2001, 1, 1),
+      lastDate: DateTime(2025, 12, 30),
+    ).then((value) {
+      if (value == null) {
+        return;
+      }
+      setState(() {
+        date = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},shape: const CircleBorder(),
+        onPressed:()async{ await pickDate();}
+         
+        ,
+        shape: const CircleBorder(),
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: SvgPicture.asset(
           AppImages.add,
@@ -29,7 +48,7 @@ class CustomNavBarState extends State<CustomNavBar> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: screens[currentIndex].route,
-     // backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       bottomNavigationBar: SafeArea(
         child: Container(
           height: 70,
@@ -50,20 +69,23 @@ class CustomNavBarState extends State<CustomNavBar> {
             children: List.generate(
               screens.length,
               (index) => InkWell(
-                onTap:index==2?null: () {
-                  setState(
-                    () {
-                      currentIndex = index;
-                    },
-                  );
-                },
+                onTap: index == 2
+                    ? null
+                    : () {
+                        setState(
+                          () {
+                            currentIndex = index;
+                          },
+                        );
+                      },
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 child: index == 2
                     ? const SizedBox()
                     : SvgPicture.asset(
-                      index == currentIndex?  screens[index].filledIcon!:screens[index].icon!,
-                  
+                        index == currentIndex
+                            ? screens[index].filledIcon!
+                            : screens[index].icon!,
                       ),
               ),
             ),
