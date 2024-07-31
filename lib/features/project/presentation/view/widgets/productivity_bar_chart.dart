@@ -25,6 +25,7 @@ class _ProductivityBarChartState extends State<ProductivityBarChart> {
       ProductivityModel('Apr', 90),
       ProductivityModel('May', 65),
       ProductivityModel('Jun', 80),
+      
     ];
 
     return BarChart(
