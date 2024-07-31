@@ -1,5 +1,8 @@
 # ringo_media
 
+### Note:
+calendar feature is not exactly as the same as ui because i wanted to sleep 🙂
+
 ## Demo link:
 https://drive.google.com/file/d/1VBDGPdRLgOXc1_G70Up_w9j74wqeB0gy/view?usp=sharing
 
