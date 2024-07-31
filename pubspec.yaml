@@ -31,7 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg:
-  flutter_screenutil:   
+  flutter_screenutil:  
+  
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -80,13 +81,13 @@ flutter:
   fonts:
       - family: Urbanist
         fonts:
-          - asset: assets/fonts/Urbanist-Regular.ttf
+          - asset: assets/fonts/Urbanist/Urbanist-Regular.ttf
             weight: 400
-          - asset: assets/fonts/Urbanist-Bold.ttf
+          - asset: assets/fonts/Urbanist/Urbanist-Bold.ttf
             weight: 700
-          - asset: assets/fonts/Urbanist-Medium.ttf
+          - asset: assets/fonts/Urbanist/Urbanist-Medium.ttf
             weight: 500
-          - asset: assets/fonts/Urbanist-SemiBold.ttf
+          - asset: assets/fonts/Urbanist/Urbanist-SemiBold.ttf
             weight: 600
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

@@ -1,47 +1,45 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:ringo_media/core/components/custom_button.dart';
 import 'package:ringo_media/core/components/custom_form_field.dart';
-import 'package:ringo_media/core/routing/navigator.dart';
-import 'package:ringo_media/core/routing/routes.dart';
+import 'package:ringo_media/core/utilities/colors.dart';
 import 'package:ringo_media/core/utilities/text_style_helper.dart';
 import 'package:ringo_media/core/validations/validators.dart';
 import 'package:ringo_media/features/login/presentation/view/widgets/social_media_buttons.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({
-    super.key,
-  });
+
+
+
+// Create a Form widget.
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  MyCustomFormState createState() {
+    return MyCustomFormState();
+  }
 }
 
-class _LoginScreenState extends State<LoginScreen> with Validations {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  final TextEditingController emailController = TextEditingController();
+// Create a corresponding State class.
+// This class holds data related to the form.
+class MyCustomFormState extends State<MyCustomForm> with Validations {
+  // Create a global key that uniquely identifies the Form widget
+  // and allows validation of the form.
+  //
+  // Note: This is a GlobalKey<FormState>,
+  // not a GlobalKey<MyCustomFormState>.
+  final _formKey = GlobalKey<FormState>();
+   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool isFormValid = false;
 
   @override
   Widget build(BuildContext context) {
+    // Build a Form widget using the _formKey created above.
     return Scaffold(
-      //resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Form(
-          key: /* LoginCubit. */ formKey,
-          onChanged: () {
-            if (formKey.currentState != null &&
-                formKey.currentState!.validate()) {
-              setState(() {
-                isFormValid = true;
-              });
-            } else {
-              setState(() {
-                isFormValid = false;
-              });
-            }
-          },
+          key: /* LoginCubit. */_formKey,
           autovalidateMode: AutovalidateMode.always,
           child: InkWell(
             onTap: () {
@@ -106,20 +104,15 @@ class _LoginScreenState extends State<LoginScreen> with Validations {
                     height: 24,
                   ),
                   CustomButton(
-                    onPressed: isFormValid
-                        ? () {
-                            if (/* LoginCubit. */ formKey.currentState!
-                                .validate()) {
-                              AppRoutes.pushNamedNavigator(
-                                  routeName: Routes.project,
-                                  replacementAll: true);
-                            }
-                          }
-                        : null,
+                    onPressed: () {
+                        if (/* LoginCubit. */_formKey.currentState!.validate()) {
+                        log('Validated');
+                      } 
+                    },
                     text: 'Login',
-                    /* background: /* LoginCubit. */formKey.currentState!.validate()
+                     background: /* LoginCubit. */_formKey.currentState!.validate()
                         ? CutsomColors.neutralColor900
-                        : CutsomColors.neutralColor300, */
+                        : CutsomColors.neutralColor300, 
                   ),
                   const SizedBox(
                     height: 24,
@@ -158,6 +151,6 @@ class _LoginScreenState extends State<LoginScreen> with Validations {
           ),
         ),
       ),
-    );
+);
   }
 }

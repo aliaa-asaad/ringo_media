@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ringo_media/core/routing/routes.dart';
+import 'package:ringo_media/features/calendar/presentation/view/screens/calendar_screen.dart';
 import 'package:ringo_media/features/login/presentation/view/screens/login_screen.dart';
-
+import 'package:ringo_media/features/project/presentation/view/screens/project_summary_screen.dart';
+import 'package:ringo_media/test_screen.dart';
 
 class AppRoutes {
   static final GlobalKey<NavigatorState> navigatorState =
@@ -10,28 +12,31 @@ class AppRoutes {
       RouteObserver<PageRoute>();
   static final GlobalKey<ScaffoldMessengerState> scaffoldState =
       GlobalKey<ScaffoldMessengerState>();
+  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-  
-   
       case Routes.login:
-        return MaterialPageRoute(
-            builder: (context) => const LoginScreen(),);
-     
+        return AppRoutes.aniamtedNavigation(screen: const LoginScreen());
 
-      /*case Routes.courseDetails:
+      case Routes.project:
         return AppRoutes.aniamtedNavigation(
-            screen: const CourseDetailsScreen());
-      case Routes.coursesCategories:
-        return AppRoutes.aniamtedNavigation(
-            screen: CoursesCategoriesScreen(
-              category: settings.arguments as Map,
-            )); */
+          screen: const ProjectSummaryScreen(),
+        );
+      case Routes.calendar:
+        return MaterialPageRoute(
+          builder: (context) => const CalendarScreen(),
+        );
+        case Routes.customForm:
+        return MaterialPageRoute(
+          builder: (context) => const MyCustomForm(),
+        );
+
       default:
         return AppRoutes.aniamtedNavigation(
-            screen: const Scaffold(
-          body: Center(child: Text('Error')),
-        ));
+          screen: const Scaffold(
+            body: Center(child: Text('Error')),
+          ),
+        );
     }
   }
 
