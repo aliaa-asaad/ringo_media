@@ -1,16 +1,12 @@
 # ringo_media
 
-A new Flutter project.
+## Demo link:
+https://drive.google.com/file/d/1VBDGPdRLgOXc1_G70Up_w9j74wqeB0gy/view?usp=sharing
 
-## Getting Started
+## apk link:
+https://drive.google.com/file/d/15jJ58xbsnMm-XtWnf6RvP-Q7yN3FHI9x/view?usp=sharing
 
-This project is a starting point for a Flutter application.
+## timesheet in this task:
+![image](https://github.com/user-attachments/assets/978d240b-745a-4e74-820a-c11201e157d1)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
