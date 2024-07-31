@@ -9,9 +9,10 @@ class CustomButton extends StatelessWidget {
   final String? text;
   final Color? background;
   final Color? textColor;
-
+  final double? height;
   final Widget? child;
   final double? width;
+  final TextStyle? textStyle;
   const CustomButton(
       {super.key,
       this.onPressed,
@@ -19,7 +20,7 @@ class CustomButton extends StatelessWidget {
       this.background,
       this.textColor,
       this.child,
-      this.width});
+      this.width, this.height, this.textStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +33,17 @@ class CustomButton extends StatelessWidget {
           margin: EdgeInsets.symmetric(
             vertical: 8.r, /* horizontal: 16.r */
           ),
-          height: 56.h,
+          height:height?? 56.h,
           curve: Curves.easeInOut,
           alignment: Alignment.center,
           /* padding: EdgeInsets.symmetric(
                             vertical: 8.r, horizontal: 32.r), */
           decoration: BoxDecoration(
+              border: Border.all(
+                  color: onPressed != null
+                      ? Theme.of(context).colorScheme.primary
+                      : CutsomColors.neutralColor500,
+                  width: 2),
               color: onPressed != null
                   ? background ?? Theme.of(context).colorScheme.primary
                   : CutsomColors.neutralColor500,
@@ -50,7 +56,7 @@ class CustomButton extends StatelessWidget {
           duration: const Duration(seconds: 1),
           child: child ??
               Text(text!,
-                  style: TextStyleHelper.bold16
+                  style:textStyle?? TextStyleHelper.bold16
                       .copyWith(color: textColor ?? Colors.white)),
         ),
       ),

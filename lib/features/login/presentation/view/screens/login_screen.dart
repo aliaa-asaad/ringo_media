@@ -108,16 +108,16 @@ class _LoginScreenState extends State<LoginScreen> with Validations {
                   CustomButton(
                     onPressed: isFormValid
                         ? () {
-                            if (/* LoginCubit. */ formKey.currentState!
+                            if ( formKey.currentState!
                                 .validate()) {
                               AppRoutes.pushNamedNavigator(
-                                  routeName: Routes.project,
+                                  routeName: Routes.navBar,
                                   replacementAll: true);
                             }
                           }
                         : null,
                     text: 'Login',
-                    /* background: /* LoginCubit. */formKey.currentState!.validate()
+                    /* background: formKey.currentState!.validate()
                         ? CutsomColors.neutralColor900
                         : CutsomColors.neutralColor300, */
                   ),

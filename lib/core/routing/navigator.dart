@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ringo_media/core/routing/routes.dart';
 import 'package:ringo_media/features/calendar/presentation/view/screens/calendar_screen.dart';
 import 'package:ringo_media/features/login/presentation/view/screens/login_screen.dart';
+import 'package:ringo_media/features/nav_bar/custom_nav_bar.dart';
 import 'package:ringo_media/features/project/presentation/view/screens/project_summary_screen.dart';
 import 'package:ringo_media/test_screen.dart';
 
@@ -23,12 +24,17 @@ class AppRoutes {
           screen: const ProjectSummaryScreen(),
         );
       case Routes.calendar:
-        return MaterialPageRoute(
-          builder: (context) => const CalendarScreen(),
+        return AppRoutes.aniamtedNavigation(
+          screen: const CalendarScreen(),
         );
-        case Routes.customForm:
-        return MaterialPageRoute(
-          builder: (context) => const MyCustomForm(),
+      case Routes.customForm:
+        return AppRoutes.aniamtedNavigation(
+          screen: const MyCustomForm(),
+        );
+
+      case Routes.navBar:
+        return AppRoutes.aniamtedNavigation(
+          screen: const CustomNavBar(),
         );
 
       default:
