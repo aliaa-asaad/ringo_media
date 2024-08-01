@@ -4,7 +4,7 @@ import 'package:ringo_media/core/utilities/colors.dart';
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     iconTheme: const IconThemeData(color: Colors.black),
-    //scaffoldBackgroundColor: Colors.transparent,
+   // scaffoldBackgroundColor: CutsomColors.neutralColor100,
     fontFamily: 'Urbanist',
     colorScheme: const ColorScheme.light(
       primary: CutsomColors.neutralColor900,

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ringo_media/core/components/custom_button.dart';
 import 'package:ringo_media/core/utilities/colors.dart';
 import 'package:ringo_media/core/utilities/images.dart';
+import 'package:ringo_media/core/utilities/media_quary.dart';
+import 'package:ringo_media/core/utilities/text_style_helper.dart';
 import 'package:ringo_media/features/calendar/presentation/view/screens/calendar_screen.dart';
 import 'package:ringo_media/features/nav_bar/domain/nav_bar_model.dart';
 import 'package:ringo_media/features/project/presentation/view/screens/project_summary_screen.dart';
+import 'package:ringo_media/test_screen.dart';
 
 class CustomNavBar extends StatefulWidget {
   const CustomNavBar({super.key});
@@ -16,9 +20,13 @@ class CustomNavBar extends StatefulWidget {
 
 class CustomNavBarState extends State<CustomNavBar> {
   var currentIndex = 1;
-  DateTime? date;
-  pickDate()async {
-    showDatePicker(barrierDismissible: false,
+  /* DateTime? date;
+  pickDate() async {
+    showDatePicker(
+      barrierDismissible: false,
+      confirmText: 'Continue',
+      cancelText: null,
+      
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2001, 1, 1),
@@ -31,15 +39,13 @@ class CustomNavBarState extends State<CustomNavBar> {
         date = value;
       });
     });
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed:()async{ await pickDate();}
-         
-        ,
+        onPressed: () => customBottomSheet(context),
         shape: const CircleBorder(),
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: SvgPicture.asset(
@@ -90,6 +96,65 @@ class CustomNavBarState extends State<CustomNavBar> {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Future<dynamic> customBottomSheet(BuildContext context) {
+    return showModalBottomSheet(isScrollControlled: true,
+      constraints: BoxConstraints(
+          minHeight: MediaQueryHelper.height * .75,
+          maxHeight: MediaQueryHelper.height * .75,
+          maxWidth: MediaQueryHelper.width,
+          minWidth: MediaQueryHelper.width),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      context: context,
+      builder: (_) => SizedBox(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const SizedBox(
+                  width: 50,
+                ),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'Choose Date',
+                      style: TextStyleHelper.bold16,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.close),
+                ),
+              ],
+            ),Divider(
+              color: CutsomColors.neutralColor300,
+              thickness: 1,
+            ),
+            const CustomCalendarSheet(),
+            Divider(
+              color: CutsomColors.neutralColor300,
+              thickness: 1,
+            ),
+            
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: CustomButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                text: 'Continue',
+              ),
+            ),
+
+          ],
         ),
       ),
     );

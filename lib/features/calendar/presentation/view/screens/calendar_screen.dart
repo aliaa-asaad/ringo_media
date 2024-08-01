@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ringo_media/core/components/custom_app_bar.dart';
-import 'package:ringo_media/core/utilities/colors.dart';
 import 'package:ringo_media/features/calendar/presentation/view/widgets/custom_calendar_list_view.dart';
 import 'package:ringo_media/features/calendar/presentation/view/widgets/custom_tab_bar.dart';
 import 'package:ringo_media/features/calendar/presentation/view/widgets/schedule_tab_bar.dart';
@@ -13,16 +12,15 @@ class CalendarScreen extends StatefulWidget {
   State<CalendarScreen> createState() => _CalendarScreenState();
 }
 
-class _CalendarScreenState extends State<CalendarScreen> with SingleTickerProviderStateMixin {
-
+class _CalendarScreenState extends State<CalendarScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
- 
- @override
+
+  @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     // TODO: implement initState
     super.initState();
-    
   }
 
   @override
@@ -31,39 +29,35 @@ class _CalendarScreenState extends State<CalendarScreen> with SingleTickerProvid
     super.dispose();
     _tabController.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child:  Scaffold(
-        appBar: CustomAppBar(title: 'My Calendar'),
-        //backgroundColor: CutsomColors.neutralColor100,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(24.0, 24, 24, 0),
-            child: Column(
-              children: [
-                CustomCalendarListView(),
-                SizedBox(
-                  height: 24,
-                ),
-                Expanded(
-                  child: CustomTabBar(
+    return Scaffold(
+      appBar: const CustomAppBar(title: 'Calendar'),
+      //backgroundColor: CutsomColors.neutralColor100,
+      body: SafeArea(
+        child: Column(
+          children: [
+            const CustomCalendarListView(),
+           
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(24.0,24,24,0),
+                child: CustomTabBar(
                   tabController: _tabController,
                   viewsBody: const [ScheduleTabBar(), TasksTabBar()],
-                  viewsTitle: [
+                  viewsTitle: const [
                     Tab(
-                     text: 'Schedule',
+                      text: 'Schedule',
                     ),
                     Tab(
-                      text:'Tasks',
+                      text: 'Tasks',
                     ),
                   ],
-                                ),
-                )
-              ],
-            ),
-          ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
