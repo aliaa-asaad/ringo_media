@@ -4,7 +4,6 @@ import 'package:ringo_media/features/calendar/presentation/view/screens/calendar
 import 'package:ringo_media/features/login/presentation/view/screens/login_screen.dart';
 import 'package:ringo_media/features/nav_bar/custom_nav_bar.dart';
 import 'package:ringo_media/features/project/presentation/view/screens/project_summary_screen.dart';
-import 'package:ringo_media/test_screen.dart';
 
 class AppRoutes {
   static final GlobalKey<NavigatorState> navigatorState =
@@ -27,7 +26,6 @@ class AppRoutes {
         return AppRoutes.aniamtedNavigation(
           screen: const CalendarScreen(),
         );
-      
 
       case Routes.navBar:
         return AppRoutes.aniamtedNavigation(

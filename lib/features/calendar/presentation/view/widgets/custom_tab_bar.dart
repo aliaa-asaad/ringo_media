@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ringo_media/core/utilities/colors.dart';
-import 'package:ringo_media/core/utilities/media_quary.dart';
 import 'package:ringo_media/core/utilities/text_style_helper.dart';
 
 class CustomTabBar extends StatelessWidget {
@@ -21,7 +20,8 @@ class CustomTabBar extends StatelessWidget {
       SizedBox(
         height: 40,
         child: TabBar(
-          unselectedLabelColor: Colors.grey, indicatorWeight: 2,
+          unselectedLabelColor: CutsomColors.neutralColor500,
+          indicatorWeight: 2,
           labelColor: CutsomColors.neutralColor900, isScrollable: false,
           labelStyle: TextStyleHelper.bold18,
           controller: tabController,

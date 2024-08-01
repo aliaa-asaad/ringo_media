@@ -18,6 +18,11 @@ class AppImages {
   static const filledAvatar = 'assets/svg/filled_avatar.svg';
   static const filledFolder = 'assets/svg/filled_folder.svg';
   static const add = 'assets/svg/add.svg';
+  static const menu = 'assets/svg/menu.svg';
+  static const arrowLeft = 'assets/svg/arrow-left.svg';
+  static const arrowRight = 'assets/svg/arrow-right.svg';
+  static const arrowDown = 'assets/svg/arrow-down.svg';
+
 
   
 }

@@ -20,16 +20,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       toolbarHeight: 80,
        elevation: 0,scrolledUnderElevation: 0,
-     // backgroundColor: Colors.white,
+      backgroundColor: CutsomColors.neutralColor100,
       bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(1.0), // height of the divider
+        preferredSize: const Size.fromHeight(1.0), 
         child: Container(
-          color: CutsomColors.neutralColor200, // color of the divider
-          height: 1.0, // thickness of the divider
+          color: CutsomColors.neutralColor200,
+          height: 1.0,
         ),
       ),
       leading: IconButton(
-        icon: const Icon(Icons.menu),
+        icon: SvgPicture.asset(AppImages.menu),
         onPressed: () {
           //Navigator.pop(context);
         },
